@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "bootstrap"
+version = "1.0.0.0"
+description = "Ooh, shiny!"
+authors = ["sylvorg <jeet.ray@syvl.org>"]
+license = "OREO"
+include = [
+	"bootstrap/**/*.py",
+	"bootstrap/**/*.hy",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.11"
+bakery = { git = "https://github.com/syvlorg/bakery.git", branch = "main" }
+tailapi = { git = "https://github.com/syvlorg/tailapi.git", branch = "main" }
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+poetry = "*"
+poetry2setup = "*"
+pytest-hy = "*"
+pytest-randomly = "*"
+pytest-parametrized = "*"
+pytest-sugar = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = [
+	"--strict-markers",
+]
+markers = [
+
+]
