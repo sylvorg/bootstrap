@@ -7067,11 +7067,11 @@
     },
     "nur_12": {
       "locked": {
-        "lastModified": 1662508464,
-        "narHash": "sha256-P6YyNLmqmQJ6RuU7YPjwV3qK/mqVlH7S6Fs9L1Joflk=",
+        "lastModified": 1662584505,
+        "narHash": "sha256-aOwo5NVWV3sudmZct0sof+6/ywqBiWOPMAbrpxPATXM=",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "640a03a8020923e9567ee74e0c4f0f42ed4f3d6a",
+        "rev": "144e03494fec7c6d6547949f90d63b4cde9f27c2",
         "type": "github"
       },
       "original": {
@@ -9033,11 +9033,11 @@
         "uglifycss": "uglifycss_12"
       },
       "locked": {
-        "lastModified": 1662518979,
-        "narHash": "sha256-64wNTvgmuK21WyJyAyj2P1SMH5x2YWXo5KaTTgDASkY=",
+        "lastModified": 1662596077,
+        "narHash": "sha256-Tr1s9p73oOMTgYB44gA23B85kFGIlFrrfuV+9OFCT2g=",
         "owner": "sylvorg",
         "repo": "settings",
-        "rev": "b82e3c24b9214ba15c28bb50f876ecc7346307fb",
+        "rev": "14bb8d4677eb1229ed36c56b456484f0f66ac993",
         "type": "github"
       },
       "original": {
