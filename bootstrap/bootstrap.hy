@@ -31,17 +31,17 @@
       on-Android (= operating-system "Android")
       gpg-one-req [ "private-gpg-key" "scp-gpg-key" "import-yubikey" ])
 
-(defn yes? [ var ] (in (.lower var) (, "y" "yes")))
+(defn yes? [ var ] (in (.lower var) #("y" "yes")))
 (defn dyes? [ var default ] (if (yes? var) default var))
 (defn iyes? [ query ] (yes? (input query)))
-(defn no? [ var ] (if (in (.lower var) (, "n" "no")) False var))
+(defn no? [ var ] (if (in (.lower var) #("n" "no")) False var))
 
 (defn chmod-bootstrap [ bootstrap ] (.chmod bootstrap (| (| (| (.stat bootstrap) (.S_IEXEC stat)) (.S_IXGRP stat)) (.S_IXOTH stat))))
 
 (unless on-Android (import bakery [tailscale nixos-generate-config]))
 
 (defn [ (.command click)
-        (.argument click "tags" :help "Tags to set for a new authkey, as a string of tags separated by spaces")
+        (.argument click "tags")
         (.option click "--print" :help "Print bakery commands and run them")
         (.option click "-A" "--tailscale-api-command" :default "pass show keys/api/tailscale/jeet.ray")
         (.option click "-a" "--tailscale-api-key")
@@ -55,23 +55,23 @@
         (.option click "-J" "--tailscale-interface" :default (if on-Android "tun0" "tailscale0"))
         (.option click "-o" "--operating-system" :default operating-system)
         (.option click "-p" "--primary-user" :default "shadowrylander")
-        (.option click "-P" "--private-gpg-key" :help "Path to private gpg key" :cls oreo.Options :xor [ "scp-gpg-key" "import-yubikey" ] :one-req gpg-one-req)
+        (.option click "-P" "--private-gpg-key" :help "Path to private gpg key" :cls oreo.Option :xor [ "scp-gpg-key" "import-yubikey" ] :one-req gpg-one-req)
         (.option click "-R" "--preauthorized" :is-flag True :help "Set the pre-authorized property for a new tailscale authkey")
         (.option click "-r" "--reusable" :is-flag True :help "Set the reusable property for a new tailscale authkey")
         (.option click
                  "-s"
                  "--scp-gpg-key"
-                 :cls oreo.Options
+                 :cls oreo.Option
                  :xor [ "private-gpg-key" "import-yubikey" ]
                  :one-req gpg-one-req
                  :help #[[SCP the private gpg key from here;
 takes three arguments: user@address:path-to-private-gpg-key, the ssh port on the remote end, and the path to store the private gpg key at locally.]]
-                 :type (, string int string))
+                 :type #(str int str))
         (.option click "--shared-primary-repo/--individual-primary-repos" :default True)
         (.option click "-T" "--tailscale-domain" :default "sylvorg.github")
         (.option click "--use-tailscale/--dont-use-tailscale" :default (not on-Android))
         (.option click "-u" "--user-repo" :default "/home/shadowrylander/aiern")
-        (.option click "--import-yubikey/--dont-import-yubikey" :default True :cls oreo.Options :xor [ "private-gpg-key" "scp-gpg-key" ] :one-req gpg-one-req)
+        (.option click "--import-yubikey/--dont-import-yubikey" :default True :cls oreo.Option :xor [ "private-gpg-key" "scp-gpg-key" ] :one-req gpg-one-req)
         (.option click "-y" "--yadm-clone" :is-flag True)
         (.option click "--zfs-root/--non-zfs-root" :default True) ]
       main [ bootstrap
@@ -98,6 +98,7 @@ takes three arguments: user@address:path-to-private-gpg-key, the ssh port on the
              user-repo
              yadm-clone
              zfs-root ]
+      "TAGS: Tags to set for a new authkey, as a string of tags separated by spaces"
       (let [ home (.home Path)
              bootstrap-path (Path f"{home}/.config/yadm/bootstrap")
              current-user (getlogin)
@@ -112,7 +113,7 @@ takes three arguments: user@address:path-to-private-gpg-key, the ssh port on the
              private-gpg-key (if private-gpg-key (Path private-gpg-key) private-gpg-key)
              initialize-primary-submodules (or initialize-primary-submodules (not (.submodule (git :C primary-repo) "foreach" :m/bool True)))
              initialize-yadm-submodules (or initialize-yadm-submodules (not (.submodule yadm "foreach" :m/bool True :m/false-error True)))
-             submodule-opts { "m/starter-args" (, "update")
+             submodule-opts { "m/starter-args" #("update")
                               "m/exports" { "GIT_DISCOVERY_ACROSS_FILESYSTEM" 1 }
                               "m/dazzling" True
                               "init" True
@@ -162,11 +163,11 @@ takes three arguments: user@address:path-to-private-gpg-key, the ssh port on the
                          (.mkdir (Path primary-repo) :parents True :exist-ok True)
                          (when (not (and (= current-user primary-user) (.exists path user-repo))) (symlink primary-repo user-repo)))
                  (.clone git f"https://github.com/{username}/{username}.git" user-repo)
-                 (.remote (git :C user-repo) :m/starter-args (, "set-url") :push True "origin" f"git@github.com:{username}/{username}.git")
+                 (.remote (git :C user-repo) :m/starter-args #("set-url") :push True "origin" f"git@github.com:{username}/{username}.git")
 
                  ;; If I unlock before I update the submodules, I can use `ssh://' urls immediately
                  (.crypt (git :C user-repo) "unlock")
-                 (.submodule (git :C user-repo) :m/regular-args (, ".password-store") #** submodule-opts)
+                 (.submodule (git :C user-repo) :m/regular-args #(".password-store") #** submodule-opts)
 
                  (when use-tailscale
                        (if tailscaled-enabled
@@ -186,17 +187,17 @@ takes three arguments: user@address:path-to-private-gpg-key, the ssh port on the
                            (raise (ValueError "Sorry; enable the tailscale daemon to continue!"))))
                  (when initialize-primary-submodules
                        (.submodule (git :C user-repo) #** submodule-opts)
-                       (for [ m (.submodule yadm :m/starter-args (, "foreach") :recursive True :m/list True) ]
+                       (for [ m (.submodule yadm :m/starter-args #("foreach") :recursive True :m/list True) ]
                             (.crypt (git :C (+ user-repo "/" (get (.split m "'") 1))) "unlock" :m/ignore-stderr True))
                        (chown :R True f"{primary-user}:{primary-user}" user-repo)))
            (when yadm-clone
                  (.clone yadm :f True #** clone-opts user-repo)
-                 (.remote (git :C user-repo) :m/starter-args (, "add") current-user yadm-repo)
+                 (.remote (git :C user-repo) :m/starter-args #("add") current-user yadm-repo)
                  (.crypt yadm unlock)
                  (when initialize-yadm-submodules
                        (when impermanent (.gitconfig yadm "core.worktree" worktree))
                              (.submodule yadm #** submodule-opts)
-                             (for [ m (.submodule yadm :m/starter-args (, "foreach") :recursive True :m/list True) ]
+                             (for [ m (.submodule yadm :m/starter-args #("foreach") :recursive True :m/list True) ]
                                   (.crypt (git :C (+ worktree "/" (get (.split m "'") 1))) "unlock" :m/ignore-stderr True))
                              (.gitconfig yadm "core.worktree" home)
                              (when (which "emacs") (make :f f"{worktree}/.emacs.d/makefile" "soft-init"))))

@@ -13,4 +13,4 @@ from bootstrap.bootstrap import *
 from addict import Dict
 
 if __name__ == "__main__":
-    tailapi(obj=Dict(dict()))
+    main(obj=Dict(dict()))

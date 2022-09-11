@@ -1,3 +1,60 @@
 * bootstrap
 
 Ooh, shiny!
+
+** Options
+
+#+begin_src text
+Usage: bootstrap [OPTIONS] TAGS
+
+  TAGS: Tags to set for a new authkey, as a string of tags separated by spaces
+
+Options:
+  --print TEXT                    Print bakery commands and run them
+  -A, --tailscale-api-command TEXT
+  -a, --tailscale-api-key TEXT
+  --bootstrap / --dont-bootstrap  Run yadm bootstrap
+  -c, --current-user-primary-user
+  -e, --ephemeral                 Set the ephemeral property for a new
+                                  tailscale authkey
+  -g, --gpg-key-id TEXT
+  --impermanent / --not-impermanent
+                                  Root wiped on boot
+  -i, --initialize-primary-submodules TEXT
+  -I, --initialize-yadm-submodules TEXT
+  -J, --tailscale-interface TEXT
+  -o, --operating-system TEXT
+  -p, --primary-user TEXT
+  -P, --private-gpg-key TEXT      Path to private gpg key NOTE: This option is
+                                  mutually exclusive with options scp-gpg-key,
+                                  import-yubikey. NOTE: This option must be
+                                  used if options private-gpg-key, scp-gpg-
+                                  key, import-yubikey are not.
+  -R, --preauthorized             Set the pre-authorized property for a new
+                                  tailscale authkey
+  -r, --reusable                  Set the reusable property for a new
+                                  tailscale authkey
+  -s, --scp-gpg-key <TEXT INTEGER TEXT>...
+                                  SCP the private gpg key from here; takes
+                                  three arguments: user@address:path-to-
+                                  private-gpg-key, the ssh port on the remote
+                                  end, and the path to store the private gpg
+                                  key at locally. NOTE: This option is
+                                  mutually exclusive with options private-gpg-
+                                  key, import-yubikey. NOTE: This option must
+                                  be used if options private-gpg-key, scp-gpg-
+                                  key, import-yubikey are not.
+  --shared-primary-repo / --individual-primary-repos
+  -T, --tailscale-domain TEXT
+  --use-tailscale / --dont-use-tailscale
+  -u, --user-repo TEXT
+  --import-yubikey / --dont-import-yubikey
+                                  NOTE: This option is mutually exclusive with
+                                  options private-gpg-key, scp-gpg-key. NOTE:
+                                  This option must be used if options private-
+                                  gpg-key, scp-gpg-key, import-yubikey are
+                                  not.
+  -y, --yadm-clone
+  --zfs-root / --non-zfs-root
+  --help                          Show this message and exit.
+#+end_src
