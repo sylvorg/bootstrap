@@ -298,8 +298,8 @@
         "xero-figlet-fonts": "xero-figlet-fonts"
       },
       "locked": {
-        "lastModified": 1693845203,
-        "narHash": "sha256-VXSHn0V8F9yYOIEyD/iy6iS4t0YvxFekOnkLxtkIDAY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-lV5j83lnb5ljYudy14P5gf9dbaEFk9RmxThfLwPvfAk=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/bundle"
@@ -364,8 +364,8 @@
         "xero-figlet-fonts": "xero-figlet-fonts_2"
       },
       "locked": {
-        "lastModified": 1693845203,
-        "narHash": "sha256-VXSHn0V8F9yYOIEyD/iy6iS4t0YvxFekOnkLxtkIDAY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-lV5j83lnb5ljYudy14P5gf9dbaEFk9RmxThfLwPvfAk=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/bundle"
@@ -431,8 +431,8 @@
         "xero-figlet-fonts": "xero-figlet-fonts_3"
       },
       "locked": {
-        "lastModified": 1693845203,
-        "narHash": "sha256-VXSHn0V8F9yYOIEyD/iy6iS4t0YvxFekOnkLxtkIDAY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-lV5j83lnb5ljYudy14P5gf9dbaEFk9RmxThfLwPvfAk=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/bundle"
@@ -497,8 +497,8 @@
         "xero-figlet-fonts": "xero-figlet-fonts_4"
       },
       "locked": {
-        "lastModified": 1693845203,
-        "narHash": "sha256-VXSHn0V8F9yYOIEyD/iy6iS4t0YvxFekOnkLxtkIDAY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-lV5j83lnb5ljYudy14P5gf9dbaEFk9RmxThfLwPvfAk=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/bundle"
@@ -564,8 +564,8 @@
         "xero-figlet-fonts": "xero-figlet-fonts_5"
       },
       "locked": {
-        "lastModified": 1693845203,
-        "narHash": "sha256-VXSHn0V8F9yYOIEyD/iy6iS4t0YvxFekOnkLxtkIDAY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-lV5j83lnb5ljYudy14P5gf9dbaEFk9RmxThfLwPvfAk=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/bundle"
@@ -6264,8 +6264,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1664041993,
-        "narHash": "sha256-fjiNIp+wuc9tXgcK/hvHRh3MXJ2kzyXOZPUFzVCRd0s=",
+        "lastModified": 1693851020,
+        "narHash": "sha256-ml1DH4hvoqfV6lVdmkoVeC0/En5WE7AhtmlqZ3AB3oI=",
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/bakery"
       },
@@ -6293,8 +6293,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1664041864,
-        "narHash": "sha256-2e0DZx3lphZ/Qm0x9dhfpYj2OtFWxks02lX6M1SHD4w=",
+        "lastModified": 1693851020,
+        "narHash": "sha256-Kv28r6XCoFsPUwqNyxL0J+5EmDVm1tODgGKDmfgi99Q=",
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/oreo"
       },
@@ -6322,8 +6322,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1664041864,
-        "narHash": "sha256-2e0DZx3lphZ/Qm0x9dhfpYj2OtFWxks02lX6M1SHD4w=",
+        "lastModified": 1693851020,
+        "narHash": "sha256-Kv28r6XCoFsPUwqNyxL0J+5EmDVm1tODgGKDmfgi99Q=",
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/oreo"
       },
@@ -6351,8 +6351,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1664042529,
-        "narHash": "sha256-mxxkpW1V4w4udthNKz6rm7bB2TCmyKvuhnyRZi7icYw=",
+        "lastModified": 1693851020,
+        "narHash": "sha256-IDYwIEO2J3R+ichCWuQ/cDDwOjlSBqdSb78U2XE9gxM=",
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/tailapi"
       },
@@ -7733,8 +7733,8 @@
         "sh": "sh"
       },
       "locked": {
-        "lastModified": 1693845202,
-        "narHash": "sha256-dfcCQdGbQ32QW9PFJwkzVAulIKLtOujqw6f5QeDUjoY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-hY8J75/WTcPCCqWto/BFsXfwyQ+/UFE25pFsjZcsWBw=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/valiant"
@@ -7765,8 +7765,8 @@
         "sh": "sh_2"
       },
       "locked": {
-        "lastModified": 1693845202,
-        "narHash": "sha256-dfcCQdGbQ32QW9PFJwkzVAulIKLtOujqw6f5QeDUjoY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-hY8J75/WTcPCCqWto/BFsXfwyQ+/UFE25pFsjZcsWBw=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/valiant"
@@ -7797,8 +7797,8 @@
         "sh": "sh_3"
       },
       "locked": {
-        "lastModified": 1693845202,
-        "narHash": "sha256-dfcCQdGbQ32QW9PFJwkzVAulIKLtOujqw6f5QeDUjoY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-hY8J75/WTcPCCqWto/BFsXfwyQ+/UFE25pFsjZcsWBw=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/valiant"
@@ -7829,8 +7829,8 @@
         "sh": "sh_4"
       },
       "locked": {
-        "lastModified": 1693845202,
-        "narHash": "sha256-dfcCQdGbQ32QW9PFJwkzVAulIKLtOujqw6f5QeDUjoY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-hY8J75/WTcPCCqWto/BFsXfwyQ+/UFE25pFsjZcsWBw=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/valiant"
@@ -7861,8 +7861,8 @@
         "sh": "sh_5"
       },
       "locked": {
-        "lastModified": 1693845202,
-        "narHash": "sha256-dfcCQdGbQ32QW9PFJwkzVAulIKLtOujqw6f5QeDUjoY=",
+        "lastModified": 1693851010,
+        "narHash": "sha256-hY8J75/WTcPCCqWto/BFsXfwyQ+/UFE25pFsjZcsWBw=",
         "submodules": true,
         "type": "git",
         "url": "file:///home/shadowrylander/shadowrylander/sylveon/syvlorg/valiant"
