@@ -68,7 +68,6 @@
 takes three arguments: user@address:path-to-private-gpg-key, the ssh port on the remote end, and the path to store the private gpg key at locally.]]
                  :type #(str int str))
         (.option click "--shared-primary-repo/--individual-primary-repos" :default True)
-        (.option click "-T" "--tailscale-domain" :default "sylvorg.github")
         (.option click "--use-tailscale/--dont-use-tailscale" :default (not on-Android))
         (.option click "-u" "--user-repo" :default "/home/shadowrylander/aiern")
         (.option click "--import-yubikey/--dont-import-yubikey" :default True :cls oreo.Option :xor [ "private-gpg-key" "scp-gpg-key" ] :one-req gpg-one-req)
@@ -108,8 +107,7 @@ takes three arguments: user@address:path-to-private-gpg-key, the ssh port on the
              primary-user (if current-user-primary-user current-user primary-user)
              dataset f"{hostname}/{primary-user}"
              primary-home (Path f"~{primary-user}")
-             reponame "aiern"
-             primary-repo (Path f"{primary-home}/{reponame}")
+             primary-repo (Path f"{primary-home}/user")
              private-gpg-key (if private-gpg-key (Path private-gpg-key) private-gpg-key)
              initialize-primary-submodules (or initialize-primary-submodules (not (.submodule (git :C primary-repo) "foreach" :m/bool True)))
              initialize-yadm-submodules (or initialize-yadm-submodules (not (.submodule yadm "foreach" :m/bool True :m/false-error True)))
@@ -140,9 +138,7 @@ takes three arguments: user@address:path-to-private-gpg-key, the ssh port on the
              username "shadowrylander"
              yadm-repo (Path f"{home}/.local/share/yadm/repo.git")
              yadm-clone (or yadm-clone (not (.exists yadm-repo)))
-             tailapi (Keys :auth (HTTPBasicAuth (or tailscale-api-key (tailscale-api-command-bin #* tailscale-api-command-args)) "")
-                           :domain tailscale-domain
-                           :recreate-response True) ]
+             tailapi (Keys :auth (HTTPBasicAuth (or tailscale-api-key (tailscale-api-command-bin #* tailscale-api-command-args)) "")) ]
            (.bake-all- gpg :m/print-command-and-run print)
            (when private-gpg-key (.import gpg private-gpg-key))
            (when scp-gpg-key

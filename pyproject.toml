@@ -18,7 +18,7 @@ tailapi = { git = "https://github.com/syvlorg/tailapi.git", branch = "main" }
 pytest = "^3.0"
 poetry = "*"
 poetry2setup = "*"
-pytest-hy = "*"
+pytest-hy = { git = "https://github.com/syvlorg/pytest-hy.git", branch = "master" }
 pytest-randomly = "*"
 pytest-parametrized = "*"
 pytest-sugar = "*"

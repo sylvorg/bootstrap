@@ -1,35 +1,82 @@
 {
-    description = "Ooh, shiny!";
-    inputs = rec {
-        settings.url = github:sylvorg/settings;
-        titan.url = github:syvlorg/titan;
-        flake-utils.url = github:numtide/flake-utils;
-        py3pkg-bakery.url = github:syvlorg/bakery;
-        py3pkg-tailapi.url = github:syvlorg/tailapi;
-        py3pkg-pytest-hy.url = github:syvlorg/pytest-hy;
-        flake-compat = {
-            url = "github:edolstra/flake-compat";
-            flake = false;
-        };
+  nixConfig = {
+    # Adapted From: https://github.com/divnix/digga/blob/main/examples/devos/flake.nix#L4
+    accept-flake-config = true;
+    auto-optimise-store = true;
+    builders-use-substitutes = true;
+    cores = 0;
+    extra-experimental-features =
+      "nix-command flakes impure-derivations recursive-nix";
+    fallback = true;
+    flake-registry =
+      "https://raw.githubusercontent.com/syvlorg/flake-registry/master/flake-registry.json";
+    keep-derivations = true;
+    keep-outputs = true;
+    max-free = 1073741824;
+    min-free = 262144000;
+    show-trace = true;
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "nickel.cachix.org-1:ABoCOGpTJbAum7U6c+04VbjvLxG9f0gJP5kYihRRdQs="
+      "sylvorg.cachix.org-1:xd1jb7cDkzX+D+Wqt6TemzkJH9u9esXEFu1yaR9p8H8="
+    ];
+    trusted-substituters = [
+      "https://cache.nixos.org/"
+      "https://nix-community.cachix.org"
+      "https://nickel.cachix.org"
+      "https://sylvorg.cachix.org"
+    ];
+    warn-dirty = false;
+  };
+  description = "Ooh, shiny!";
+  inputs = rec {
+    bundle = {
+      url = "git+https://github.com/sylvorg/bundle.git";
+      type = "git";
+      submodules = true;
     };
-    outputs = inputs@{ self, flake-utils, settings, ... }: with builtins; with settings.lib; with flake-utils.lib; settings.mkOutputs {
-        inherit inputs;
-        type = "hy";
-        pname = "bootstrap";
-        isApp = true;
-        callPackage = args@{ stdenv, pname, bakery, tailapi }: j.mkPythonPackage self stdenv [ "postCheck" ] (rec {
-            doCheck = false;
-            owner = "sylvorg";
-            inherit pname;
+    valiant.follows = "bundle/valiant";
+    nixpkgs.follows = "bundle/nixpkgs";
+
+    pyPkg-bakery.url =
+      "git+https://github.com/syvlorg/bakery.git";
+    pyPkg-tailapi.url =
+      "git+https://github.com/syvlorg/tailapi.git";
+
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+  };
+  outputs = inputs@{ self, flake-utils, ... }:
+    with builtins;
+    with inputs.bundle.lib;
+    with flake-utils.lib;
+    inputs.bundle.mkOutputs.python {
+      inherit inputs self;
+      pname = "bootstrap";
+      doCheck = false;
+      isApp = true;
+      callPackage = args@{ callPackage }:
+        callPackage (iron.mkPythonPackage {
+          inherit self inputs;
+          recursiveOverrides = toList "postCheck";
+          package = rec {
+            owner = "syvlorg";
+            inherit (self) doCheck;
             src = ./.;
-            propagatedBuildInputs = [ bakery tailapi ];
             postPatch = ''
-                substituteInPlace pyproject.toml --replace "bakery = { git = \"https://github.com/syvlorg/bakery.git\", branch = \"main\" }" ""
-                substituteInPlace setup.py --replace "'bakery @ git+https://github.com/syvlorg/bakery.git@main'," "" || :
-                substituteInPlace pyproject.toml --replace "tailapi = { git = \"https://github.com/syvlorg/tailapi.git\", branch = \"main\" }" ""
-                substituteInPlace setup.py --replace "'tailapi @ git+https://github.com/syvlorg/tailapi.git@main'," "" || :
+              substituteInPlace pyproject.toml \
+                --replace "bakery = { git = \"https://github.com/syvlorg/bakery.git\", branch = \"main\" }" "" \
+                --replace "tailapi = { git = \"https://github.com/syvlorg/tailapi.git\", branch = \"main\" }" ""
+              substituteInPlace setup.py \
+                --replace "'bakery @ git+https://github.com/syvlorg/bakery.git@main'," "" \
+                --replace "'tailapi @ git+https://github.com/syvlorg/tailapi.git@main'," "" || :
             '';
             meta.description = "Ooh, shiny!";
-        });
-    };
+          };
+        }) { };
+    } { };
 }
